@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" data-th-fragment="header">
+<head>
+    <meta charset="UTF-8">
+    <!-- Bootstrap CSS -->
+    <link href="../../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <!-- bootstrap tags CSS -->
+    <link href="../../css/bootstrap-tagsinput.css" th:href="@{/css/jquery.tagsinput.min.css}" rel="stylesheet">
+
+    <title>Thyeleaf in action</title>
+</head>
+<body>
+<footer class="blog-footer" th:fragment="footer">
+    <nav class="navbar fixed-bottom navbar-inverse bg-inverse">
+        <p class="text-white text-center" >
+            Copyright<a href="#"> @ Gavin.com</a>
+        </p>
+    </nav>
+
+</footer>
+</body>
+</html>
