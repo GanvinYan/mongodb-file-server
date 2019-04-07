@@ -1,17 +1,22 @@
 server:
   address: localhost
   port: 8081
-
+  http2:
+    enabled: true
+  ssl:
+    enabled: true
+    key-store: classpath:keystore.p12 # 启用http2
+    key-store-password: 12345678 # 证书密码
+    key-store-type: PKCS12 # 证书类型
+    protocol: TLSv1.2 # 协议类型
+    key-alias: undertow
 # Thymeleaf 
 spring:
   thymeleaf:
     encoding: UTF-8
     cache: false
     mode: HTML5
-  # limit upload file size
-  http:
-    multipart.max-file-size: 1024KB
-    max-request-size: 1024KB
+
 
 # independent MongoDB server
 #spring.data.mongodb.uri=mongodb://localhost:27017/test
