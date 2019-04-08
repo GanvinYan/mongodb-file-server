@@ -45,9 +45,12 @@ repositories {
 dependencies {
 
 	// 该依赖用于编译阶段
-	compile('org.springframework.boot:spring-boot-starter-web',
-			'org.springframework.boot:spring-boot-starter-undertow'
-			)
+	compile('org.springframework.boot:spring-boot-starter-web')
+	
+	compile('org.springframework.boot:spring-boot-starter-undertow')
+			{
+				exclude module: 'spring-boot-starter-tomcat'
+			}
 	
 	compile('org.springframework.boot:spring-boot-starter-actuator')
 	
