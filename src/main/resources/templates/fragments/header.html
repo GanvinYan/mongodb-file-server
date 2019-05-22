@@ -11,13 +11,23 @@
     <title>Thyeleaf in action</title>
 </head>
 <body>
-<footer class="blog-footer" th:fragment="footer">
-    <nav class="navbar fixed-bottom navbar-inverse bg-inverse">
-        <p class="text-white text-center" >
-            Copyright<a href="#"> @ Gavin.com</a>
-        </p>
-    </nav>
-
-</footer>
+<nav class="navbar navbar-inverse bg-inverse navbar-toggleable-md">
+    <div class="container">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                data-target="#navbarsContainer">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="/" th:href="@{~/}">NewStartBlog</a>
+        <div class="collapse navbar-collapse" id="navbarsContainer">
+            <!-- <h1>Thymeleaf in acction</h1> -->
+            <ul class="navbar-nav mar-auto">
+                <li class="nav-item">
+                    <a class="header-nav-link text-white" th:href="@{~/}">首页</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 </body>
+
 </html>
