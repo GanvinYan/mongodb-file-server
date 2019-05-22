@@ -41,6 +41,9 @@ repositories {
 	maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
 }
 
+configurations {
+	compile.exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
+}
 // 依赖关系
 dependencies {
 
@@ -48,9 +51,6 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
 	
 	compile('org.springframework.boot:spring-boot-starter-undertow')
-			{
-				exclude module: 'spring-boot-starter-tomcat'
-			}
 	
 	compile('org.springframework.boot:spring-boot-starter-actuator')
 	

@@ -3,7 +3,7 @@ package com.spark.spring.boot.server.config;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
 /**
  * Spring Security 配置类.
@@ -13,10 +13,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
  */
 @Configuration
 @EnableWebMvc
-public class SecurityConfig extends WebMvcConfigurerAdapter {
+public class SecurityConfig extends WebMvcConfigurationSupport {
 
 	@Override
 	public void addCorsMappings(CorsRegistry registry) {
-		registry.addMapping("/**").allowedOrigins("*") ; // 允许跨域请求
+		registry.addMapping("/**").allowedOrigins("*"); // 允许跨域请求
 	}
 }

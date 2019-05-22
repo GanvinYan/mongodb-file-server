@@ -10,13 +10,25 @@ server:
     key-store-type: PKCS12 # 证书类型
     protocol: TLSv1.2 # 协议类型
     key-alias: undertow
-# Thymeleaf 
 spring:
+  # Thymeleaf
   thymeleaf:
     encoding: UTF-8
     cache: false
     mode: HTML5
+management:
+  server:
+    port: 54001
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
 
-
+info:
+  author: codel
+  email: gang.yan591@gmail.com
 # independent MongoDB server
 #spring.data.mongodb.uri=mongodb://localhost:27017/test
