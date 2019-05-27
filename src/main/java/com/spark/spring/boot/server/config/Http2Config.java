@@ -23,20 +23,20 @@ public class Http2Config {
         factory.addBuilderCustomizers(
                 builder -> {
                     builder.setServerOption(UndertowOptions.ENABLE_HTTP2, true)
-                            .setServerOption(UndertowOptions.HTTP2_SETTINGS_ENABLE_PUSH,true);
+                            .setServerOption(UndertowOptions.HTTP2_SETTINGS_ENABLE_PUSH, true);
                 });
-//这段可以增加http重定向，如果只需要http2的话下面的代码可以去掉
+//       这段可以增加http重定向，如果只需要http2的话下面的代码可以去掉
         factory.addBuilderCustomizers(new UndertowBuilderCustomizer() {
             @Override
             public void customize(Undertow.Builder builder) {
                 builder.addHttpListener(8080, "0.0.0.0");
             }
         });
-//下面这段是将http的8080端口重定向到https的8443端口上
+//      下面这段是将http的8080端口重定向到https的8081端口上
         factory.addDeploymentInfoCustomizers(deploymentInfo -> {
             deploymentInfo.addSecurityConstraint(new SecurityConstraint()
                     .addWebResourceCollection(new WebResourceCollection()
-                            .addUrlPattern("/*")) .setTransportGuaranteeType(TransportGuaranteeType.CONFIDENTIAL)
+                            .addUrlPattern("/*")).setTransportGuaranteeType(TransportGuaranteeType.CONFIDENTIAL)
                     .setEmptyRoleSemantic(SecurityInfo.EmptyRoleSemantic.PERMIT))
                     .setConfidentialPortManager(exchange -> 8081);
         });
