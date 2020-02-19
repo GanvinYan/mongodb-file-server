@@ -32,13 +32,13 @@ public class Http2Config {
                 builder.addHttpListener(8080, "0.0.0.0");
             }
         });
-//      下面这段是将http的8080端口重定向到https的8081端口上
+//      下面这段是将http的8081端口重定向到https的8443端口上
         factory.addDeploymentInfoCustomizers(deploymentInfo -> {
             deploymentInfo.addSecurityConstraint(new SecurityConstraint()
                     .addWebResourceCollection(new WebResourceCollection()
                             .addUrlPattern("/*")).setTransportGuaranteeType(TransportGuaranteeType.CONFIDENTIAL)
                     .setEmptyRoleSemantic(SecurityInfo.EmptyRoleSemantic.PERMIT))
-                    .setConfidentialPortManager(exchange -> 8081);
+                    .setConfidentialPortManager(exchange -> 8443);
         });
         return factory;
     }
