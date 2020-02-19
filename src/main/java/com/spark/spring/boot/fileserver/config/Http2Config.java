@@ -1,4 +1,4 @@
-package com.spark.spring.boot.server.config;
+package com.spark.spring.boot.fileserver.config;
 
 import io.undertow.Undertow;
 import io.undertow.UndertowOptions;
@@ -29,10 +29,10 @@ public class Http2Config {
         factory.addBuilderCustomizers(new UndertowBuilderCustomizer() {
             @Override
             public void customize(Undertow.Builder builder) {
-                builder.addHttpListener(8080, "0.0.0.0");
+                builder.addHttpListener(8889, "0.0.0.0");
             }
         });
-//      下面这段是将http的8081端口重定向到https的8443端口上
+//      下面这段是将http的8080端口重定向到https的8443端口上
         factory.addDeploymentInfoCustomizers(deploymentInfo -> {
             deploymentInfo.addSecurityConstraint(new SecurityConstraint()
                     .addWebResourceCollection(new WebResourceCollection()

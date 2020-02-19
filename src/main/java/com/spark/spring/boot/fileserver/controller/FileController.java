@@ -153,7 +153,8 @@ public class FileController {
 					new Binary(file.getBytes()));
 			f.setMd5(MD5Util.getMD5(file.getInputStream()));
 			returnFile = fileService.saveFile(f);
-			String path = "//" + serverAddress + ":" + serverPort + "/view/" + returnFile.getId();
+//			String path = "https://" + serverAddress + ":" + serverPort + "/view/" + returnFile.getId();
+			String path = "/view/" + returnFile.getId();
 			return ResponseEntity.status(HttpStatus.OK).body(path);
 
 		} catch (IOException | NoSuchAlgorithmException ex) {

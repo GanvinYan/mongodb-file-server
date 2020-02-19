@@ -1,6 +1,6 @@
 server:
   address: localhost
-  port: 8081
+  port: 8889
   http2:
     enabled: true
   ssl:
@@ -16,19 +16,11 @@ spring:
     encoding: UTF-8
     cache: false
     mode: HTML5
-management:
-  server:
-    port: 54001
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-  endpoint:
-    health:
-      show-details: always
-
-info:
-  author: codel
-  email: gang.yan591@gmail.com
-# independent MongoDB server
-#spring.data.mongodb.uri=mongodb://localhost:27017/test
+#  data:
+    # independent MongoDB server
+#    mongodb:
+#      host: 154.8.171.18
+#      port: 27017
+#      username: admin
+#      password: TC123456
+#      database: admin
