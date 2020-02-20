@@ -18,11 +18,6 @@ import org.springframework.context.annotation.Configuration;
 public class Http2Config {
 
 
-    /**
-     * https服务端口
-     */
-    @Value("${server.port}")
-    private Integer httpsPort;
 
     /**
      * 采用Undertow作为服务器。
@@ -48,7 +43,7 @@ public class Http2Config {
                     .addWebResourceCollection(new WebResourceCollection().addUrlPattern("/*"))
                     .setTransportGuaranteeType(TransportGuaranteeType.CONFIDENTIAL)
                     .setEmptyRoleSemantic(SecurityInfo.EmptyRoleSemantic.PERMIT))
-                    .setConfidentialPortManager(exchange -> httpsPort);
+                    .setConfidentialPortManager(exchange -> 8443);
         });
         return undertowFactory;
     }
