@@ -1,4 +1,4 @@
-package com.spark.spring.boot.server.config;
+package com.spark.spring.boot.fileserver.config;
 
 import io.undertow.Undertow;
 import io.undertow.UndertowOptions;
@@ -6,14 +6,14 @@ import io.undertow.servlet.api.SecurityConstraint;
 import io.undertow.servlet.api.SecurityInfo;
 import io.undertow.servlet.api.TransportGuaranteeType;
 import io.undertow.servlet.api.WebResourceCollection;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.web.embedded.undertow.UndertowBuilderCustomizer;
 import org.springframework.boot.web.embedded.undertow.UndertowServletWebServerFactory;
-import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 
+/**
+ * @author gang
+ */
 @Configuration
 public class Http2Config {
 
@@ -30,14 +30,20 @@ public class Http2Config {
      * 通过将处理程序链接在一起来配置Undertow服务器。它可以对各种功能进行配置，方便灵活。
      */
     @Bean
-    public ServletWebServerFactory undertowFactory() {
-        UndertowServletWebServerFactory undertowFactory = new UndertowServletWebServerFactory();
-        undertowFactory.addBuilderCustomizers((Undertow.Builder builder) -> {
-            builder.addHttpListener(8080, "0.0.0.0");
-            // 开启HTTP2
-            builder.setServerOption(UndertowOptions.ENABLE_HTTP2, true);
+    public UndertowServletWebServerFactory undertowFactory() {
+        UndertowServletWebServerFactory factory = new UndertowServletWebServerFactory();
+        factory.addBuilderCustomizers((Undertow.Builder builder) -> {
+            // 开启HTTP2  服务器推送
+            builder.setServerOption(UndertowOptions.ENABLE_HTTP2, true)
+                    .setServerOption(UndertowOptions.HTTP2_SETTINGS_ENABLE_PUSH, true);
         });
-        undertowFactory.addDeploymentInfoCustomizers(deploymentInfo -> {
+
+        //这段可以增加http重定向，如果只需要http2的话下面的代码可以去掉
+        factory.addBuilderCustomizers((Undertow.Builder builder) -> {
+            builder.addHttpListener(8080, "0.0.0.0");
+        });
+
+        factory.addDeploymentInfoCustomizers(deploymentInfo -> {
             // 开启HTTP自动跳转至HTTPS
             deploymentInfo.addSecurityConstraint(new SecurityConstraint()
                     .addWebResourceCollection(new WebResourceCollection().addUrlPattern("/*"))
@@ -45,8 +51,7 @@ public class Http2Config {
                     .setEmptyRoleSemantic(SecurityInfo.EmptyRoleSemantic.PERMIT))
                     .setConfidentialPortManager(exchange -> 8443);
         });
-        return undertowFactory;
+        return factory;
     }
-
 
 }
